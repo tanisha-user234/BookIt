@@ -15,6 +15,11 @@ export const authenticate=(req:AuthRequest,res:Response,next:NextFunction)=>{
         token= req.headers.authorization.split(' ')[1];
     }
 
+    //try to read the token from the cookie
+   else if(req.cookies && req.cookies.token){
+        token = req.cookies.token;
+    }
+
     //if no token provided ,reject the request
     if(!token){
         console.error("NO token provided")
