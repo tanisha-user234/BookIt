@@ -27,7 +27,7 @@ export const signup =  async (req:Request,res:Response)=>{
     const passwordHash= await bcrypt.hash(password,10);
 
     //now insert the user email and password in db
-    const insertResult = await db.raw('INSERT into users(email,password_hash,role',[email,passwordHash,role||'user']);
+    const insertResult = await db.raw('INSERT into users(email,password_hash,role) VALUES (?, ?, ?) RETURNING id, email, role',[email,passwordHash,role||'user']);
     const user = insertResult.rows[0];
 
     //create jwt
