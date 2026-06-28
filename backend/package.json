@@ -4,6 +4,7 @@
   "description": "Live Event Booking Platform API in TypeScript",
   "main": "src/server.ts",
   "scripts": {
+    "build": "tsc",
     "start": "tsc && node dist/server.js",
     "dev": "nodemon --watch src -e ts --exec ts-node src/server.ts",
     "migrate": "knex --knexfile knexfile.ts migrate:latest",

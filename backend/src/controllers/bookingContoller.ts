@@ -18,7 +18,7 @@ export const bookEvent = async (req:AuthRequest,res:Response)=>{
         .catch(err=>console.error('Failed to log booking start',err));
 
         //start an isolated transaction
-        db.transaction(async(trx)=>{
+        await db.transaction(async(trx)=>{
             //first lock the row in which we are booking
             const eventResult= await trx.raw(
                 'SELECT capacity,seats_booked from events where id=? for update',

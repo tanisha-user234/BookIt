@@ -13,14 +13,14 @@ export const getEvents =  async (req:Request,res:Response)=>{
 
     try {
         let query = 'Select e.*,u.email as organizer_email from events e join users u on e.organizer_id=u.id where 1=1'
-        let countQuery= 'SELECT COUNT(*) as count from venets where 1=1';
+        let countQuery= 'SELECT COUNT(*) as count from events where 1=1';
         const params:any[]=[];
         const countParams:any[] = [];
 
         //filter for search
         if(search){
-            query+='and e.title ILIKE ?';
-            countQuery+='and title ILIKE ?';
+            query+=' and e.title ILIKE ?';
+            countQuery+=' and title ILIKE ?';
             params.push(`%${search}%`);
             countParams.push(`%${search}%`)
         }
@@ -32,8 +32,8 @@ export const getEvents =  async (req:Request,res:Response)=>{
             const startDay= new Date(selectedDate.setHours(0,0,0,0));
             const endDay =  new Date(selectedDate.setHours(23,59,59,999));
 
-            query+= 'and e.date_time between ? and ?';
-            countQuery+='and date between ? and ?';
+            query+= ' and e.date_time between ? and ?';
+            countQuery+=' and date_time between ? and ?';
             params.push(startDay,endDay);
             countParams.push(startDay,endDay);
         }
@@ -43,7 +43,7 @@ export const getEvents =  async (req:Request,res:Response)=>{
         const count = parseInt(countResult.rows[0].count, 10);
 
         //apply sorting and pagination
-        query+= 'order by e.date_time ASC limit ? offset ?';
+        query+= ' order by e.date_time ASC limit ? offset ?';
         params.push(limit,offset);
 
         //execute the final query
@@ -68,7 +68,7 @@ export const getEventById = async (req:Request,res:Response)=>{
     const {id}=req.params;
     try {
         const result = await db.raw(
-            'seelct e.*, u.email as organizer_email from events e join users u om e.organizer_id=u.id where e.id=?',
+            'select e.*, u.email as organizer_email from events e join users u on e.organizer_id=u.id where e.id=?',
             [id]
         );
         const event =  result.rows[0];

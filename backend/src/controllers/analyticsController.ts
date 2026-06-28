@@ -31,6 +31,7 @@ let views = 0;
       if (log.action === 'event_viewed') views = count;
       else if (log.action === 'booking_started') starts = count;
       else if (log.action === 'booking_confirmed') confirmed = count;
+      else if (log.action === 'booking_cancelled') cancelled = count;
     });
 
     // Compute conversion rate
@@ -41,6 +42,7 @@ let views = 0;
       title: event.title,
       capacity: event.capacity,
       seats_booked: event.seats_booked,
+      price: event.price,
       metrics: {
         views,
         starts,

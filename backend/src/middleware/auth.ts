@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { AuthRequest,UserPayload } from "../types";
 import { error } from "console";
 
-const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_key_123';
 
 //this middleware checks the presence and validity of the token
 
@@ -32,7 +32,7 @@ export const authenticate=(req:AuthRequest,res:Response,next:NextFunction)=>{
         next();
     } catch (error) {
         //this means we got the token but validation fails
-        console.error("Tolen validation failed");
+        console.error("Token validation failed");
         return res.status(401).json({error:'Invalid or expired token.'})
     }
 }
