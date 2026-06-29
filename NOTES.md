@@ -13,7 +13,7 @@ I also added a unique constraint on (user_id, event_id) in the bookings table so
 * indexes: I added indexes on events(title) to speed up searching events by name, and events(date_time) to make date filtering fast.
 
 ## ai stuff and disagreements
-I used ai to help write some docker scripts and clean comments.
+I used ai to assist me in some parts of UI and writing clean readme.md file.
 disagreed with ai on:
 1. npm workspaces: ai wanted to link packages under one root lockfile, but I kept them separate with prefix flags because merging express and next.js packages can mess up node modules.
 2. auto seeding: ai templates suggested running database seed on every server start. I turned this off because seeds clear the tables and would wipe out database progress.
