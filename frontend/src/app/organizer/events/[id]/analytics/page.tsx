@@ -81,21 +81,6 @@ export default function EventAnalytics() {
   }
 
   const { metrics } = analytics;
-  // Calculate total revenue: (confirmed bookings * price)
-  // Note: We might need to check if pricing is available in analytics or we can parse it from event details. 
-  // Let's assume we show price or mock it if not present, but wait, let's fetch event price if possible.
-  // Actually, we can fetch event details or check if the backend getEventAnalytics controller returns it. 
-  // Wait, in analyticsController.ts, it returns eventId, title, capacity, seats_booked, and metrics. It doesn't return price!
-  // But wait, we can look at the attendees list or calculate it. Or, we can just fetch event details from GET /events/:id to get the price.
-  // Let's make a call or use a default since we can see the price of the event is in the database!
-  // Wait, does analytics have the event model? Yes! `const event = eventResult.rows[0];` has `price`! But they didn't include `price` in the JSON response:
-  // `return res.status(200).json({ eventId, title: event.title, capacity: event.capacity, seats_booked: event.seats_booked, metrics: ... })`
-  // Oh, that's fine. We can fetch it, or we can just update the backend analytics controller to also return the event price, or we can calculate it in the frontend if we want.
-  // Wait! Let's update `analyticsController.ts` to return `price` as well! That is super clean and lets the frontend render the revenue perfectly!
-  // Wait, let's look at `analyticsController.ts`:
-  // `return res.status(200).json({ eventId, title: event.title, capacity: event.capacity, seats_booked: event.seats_booked, metrics: ... })`
-  // Let's modify it to include `price: event.price`. That's a great improvement!
-  // Let's do that in a moment. First, let's write this page with support for `analytics.price`.
 
   const priceVal = Number(analytics.price || 0);
   const revenue = priceVal * (metrics.confirmed || 0);
