@@ -17,7 +17,7 @@ export default function Signup() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  // Redirect if already logged in
+  // redirect if logged in
   useEffect(() => {
     if (user) {
       if (user.role === 'organizer') {
@@ -52,7 +52,7 @@ export default function Signup() {
       const response = await api.post('/auth/signup', { email, password, role });
       login(response.data.user);
       
-      // Redirect based on role
+      // redirect depending on role
       if (response.data.user.role === 'organizer') {
         router.push('/organizer');
       } else {
@@ -91,7 +91,7 @@ export default function Signup() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             
-            {/* Role Selection Grid */}
+
             <div className="space-y-2">
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
                 Register as a
@@ -127,7 +127,7 @@ export default function Signup() {
               </div>
             </div>
 
-            {/* Email Field */}
+
             <div className="space-y-1.5">
               <label htmlFor="email" className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 Email Address
@@ -146,7 +146,7 @@ export default function Signup() {
               </div>
             </div>
 
-            {/* Password Field */}
+
             <div className="space-y-1.5">
               <label htmlFor="password" className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 Password
@@ -165,7 +165,7 @@ export default function Signup() {
               </div>
             </div>
 
-            {/* Confirm Password Field */}
+
             <div className="space-y-1.5">
               <label htmlFor="confirmPassword" className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 Confirm Password

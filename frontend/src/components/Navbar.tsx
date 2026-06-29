@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
     <nav className="sticky top-0 z-50 bg-slate-900/85 backdrop-blur-md border-b border-slate-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-indigo-400 hover:text-indigo-300 transition-colors">
               <Calendar className="h-6 w-6" />
@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
 
-          {/* Navigation Links */}
+
           <div className="flex items-center gap-6">
             <Link href="/" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
               Browse Events

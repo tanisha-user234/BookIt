@@ -15,7 +15,7 @@ export default function Login() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  // Redirect if already logged in
+  // redirect if logged in
   useEffect(() => {
     if (user) {
       if (user.role === 'organizer') {
@@ -40,7 +40,7 @@ export default function Login() {
       const response = await api.post('/auth/login', { email, password });
       login(response.data.user);
       
-      // Redirect based on role
+      // redirect depending on role
       if (response.data.user.role === 'organizer') {
         router.push('/organizer');
       } else {
@@ -78,7 +78,7 @@ export default function Login() {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
-            {/* Email Field */}
+
             <div className="space-y-1.5">
               <label htmlFor="email" className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 Email Address
@@ -97,7 +97,7 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Password Field */}
+
             <div className="space-y-1.5">
               <div className="flex justify-between items-center">
                 <label htmlFor="password" className="text-xs font-semibold text-slate-400 uppercase tracking-wider">

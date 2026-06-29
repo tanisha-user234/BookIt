@@ -14,7 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Debounced/fetch function
+  // fetch function
   const fetchEvents = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -40,7 +40,7 @@ export default function Home() {
     fetchEvents();
   }, [fetchEvents]);
 
-  // Handle filter resets
+  // reset filters
   const handleResetFilters = () => {
     setSearch('');
     setDate('');
@@ -51,7 +51,7 @@ export default function Home() {
     <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-12">
         
-        {/* Hero / Header Section */}
+
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             Experience Live Events Like Never Before
@@ -61,7 +61,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Search & Filter Bar */}
+
         <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative w-full md:flex-1">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Error message */}
+
         {error && (
           <div className="bg-rose-950/30 border border-rose-800/40 text-rose-300 p-4 rounded-xl flex items-center justify-between">
             <p className="text-sm">{error}</p>
@@ -117,9 +117,9 @@ export default function Home() {
           </div>
         )}
 
-        {/* Content Section */}
+
         {loading ? (
-          /* Loading Skeletons */
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((n) => (
               <div key={n} className="bg-slate-900 border border-slate-800 rounded-xl h-[420px] animate-pulse flex flex-col p-6 space-y-6">
@@ -139,14 +139,14 @@ export default function Home() {
             ))}
           </div>
         ) : events.length > 0 ? (
-          /* Events Grid */
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {events.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         ) : (
-          /* Empty State */
+
           <div className="text-center py-20 bg-slate-900/40 border border-slate-850 rounded-2xl">
             <Calendar className="h-12 w-12 text-slate-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-white">No Events Found</h3>
@@ -164,7 +164,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Pagination Controls */}
+
         {!loading && totalPages > 1 && (
           <div className="flex items-center justify-center gap-4 pt-6 border-t border-slate-900">
             <button

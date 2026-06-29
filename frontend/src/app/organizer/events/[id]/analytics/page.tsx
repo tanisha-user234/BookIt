@@ -18,7 +18,7 @@ export default function EventAnalytics() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // 1. Protection Check
+  // route protection check
   useEffect(() => {
     if (!authLoading && (!user || user.role !== 'organizer')) {
       router.push('/login');
@@ -29,7 +29,7 @@ export default function EventAnalytics() {
     setLoading(true);
     setError('');
     try {
-      // Run requests in parallel
+      // load in parallel
       const [analyticsRes, attendeesRes] = await Promise.all([
         api.get(`/organizer/events/${eventId}/analytics`),
         api.get(`/organizer/events/${eventId}/attendees`),
@@ -89,12 +89,12 @@ export default function EventAnalytics() {
     <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-8">
         
-        {/* Navigation */}
+
         <Link href="/organizer" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
           <ArrowLeft className="h-4 w-4" /> Back to Dashboard
         </Link>
 
-        {/* Title Block */}
+
         <div className="space-y-1">
           <h1 className="text-3xl font-extrabold text-white tracking-tight">
             Event Analytics
@@ -104,9 +104,9 @@ export default function EventAnalytics() {
           </p>
         </div>
 
-        {/* Metrics Grid */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1: Page Views */}
+
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl flex items-center gap-4 shadow-xl">
             <div className="p-3 bg-slate-950 rounded-lg text-indigo-400 border border-slate-800">
               <Eye className="h-6 w-6" />
@@ -117,7 +117,7 @@ export default function EventAnalytics() {
             </div>
           </div>
 
-          {/* Card 2: Tickets Booked */}
+
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl flex items-center gap-4 shadow-xl">
             <div className="p-3 bg-slate-950 rounded-lg text-emerald-400 border border-slate-800">
               <Users className="h-6 w-6" />
@@ -128,7 +128,7 @@ export default function EventAnalytics() {
             </div>
           </div>
 
-          {/* Card 3: Conversion Rate */}
+
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl flex items-center gap-4 shadow-xl">
             <div className="p-3 bg-slate-950 rounded-lg text-purple-400 border border-slate-800">
               <TrendingUp className="h-6 w-6" />
@@ -139,7 +139,7 @@ export default function EventAnalytics() {
             </div>
           </div>
 
-          {/* Card 4: Revenue */}
+
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl flex items-center gap-4 shadow-xl">
             <div className="p-3 bg-slate-950 rounded-lg text-amber-400 border border-slate-800">
               <DollarSign className="h-6 w-6" />
@@ -151,10 +151,10 @@ export default function EventAnalytics() {
           </div>
         </div>
 
-        {/* Detailed Stats & Attendees Section */}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* Funnel Analytics */}
+
           <div className="lg:col-span-1 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
             <h2 className="text-lg font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-indigo-400" /> Booking Funnel
@@ -224,7 +224,7 @@ export default function EventAnalytics() {
             </div>
           </div>
 
-          {/* Attendee List Table */}
+
           <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden flex flex-col">
             <div className="px-6 py-4 border-b border-slate-800 flex items-center gap-2">
               <Users className="h-5 w-5 text-indigo-400" />

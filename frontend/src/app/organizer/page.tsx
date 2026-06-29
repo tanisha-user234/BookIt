@@ -15,7 +15,7 @@ export default function OrganizerDashboard() {
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
   
-  // Form states
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [venue, setVenue] = useState('');
@@ -25,7 +25,7 @@ export default function OrganizerDashboard() {
   const [formError, setFormError] = useState('');
   const [creating, setCreating] = useState(false);
 
-  // 1. Role-based Route Protection
+  // route protection
   useEffect(() => {
     if (!authLoading && (!user || user.role !== 'organizer')) {
       router.push('/login');
@@ -70,7 +70,7 @@ export default function OrganizerDashboard() {
         price: parseFloat(price) || 0.00,
       });
 
-      // Reset form
+
       setTitle('');
       setDescription('');
       setVenue('');
@@ -79,7 +79,7 @@ export default function OrganizerDashboard() {
       setPrice('');
       setShowCreateModal(false);
       
-      // Re-fetch events
+
       fetchOrganizerEvents();
     } catch (err: any) {
       console.error('Create event error:', err);
@@ -101,7 +101,7 @@ export default function OrganizerDashboard() {
     <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         
-        {/* Header */}
+
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-extrabold text-white tracking-tight">
@@ -120,7 +120,7 @@ export default function OrganizerDashboard() {
           </button>
         </div>
 
-        {/* Dashboard Grid */}
+
         {loading ? (
           <div className="text-center py-20">
             <Loader2 className="h-10 w-10 animate-spin text-indigo-500 mx-auto" />
@@ -164,7 +164,7 @@ export default function OrganizerDashboard() {
                       </div>
                     </div>
 
-                    {/* Compact capacity indicator */}
+
                     <div className="space-y-1.5 max-w-xs">
                       <div className="flex justify-between text-[10px] font-semibold text-slate-400">
                         <span>Booked: {event.seats_booked} / {event.capacity} seats</span>
@@ -179,7 +179,7 @@ export default function OrganizerDashboard() {
                     </div>
                   </div>
 
-                  {/* Actions Column */}
+
                   <div className="flex items-center gap-4 shrink-0 justify-end">
                     <Link
                       href={`/events/${event.id}`}
@@ -211,12 +211,12 @@ export default function OrganizerDashboard() {
           </div>
         )}
 
-        {/* Create Event Modal */}
+
         {showCreateModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
               
-              {/* Modal Header */}
+
               <div className="flex justify-between items-center px-6 py-4 border-b border-slate-800">
                 <h2 className="text-xl font-bold text-white">Create New Event</h2>
                 <button
@@ -227,7 +227,7 @@ export default function OrganizerDashboard() {
                 </button>
               </div>
 
-              {/* Modal Body */}
+
               <form onSubmit={handleCreateEvent} className="p-6 space-y-6">
                 {formError && (
                   <div className="bg-rose-950/20 border border-rose-800/40 text-rose-300 p-3 rounded-lg flex items-center gap-2 text-sm">
@@ -238,7 +238,7 @@ export default function OrganizerDashboard() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   
-                  {/* Title */}
+
                   <div className="space-y-1.5 md:col-span-2">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                       Event Title <span className="text-rose-500">*</span>
@@ -253,7 +253,7 @@ export default function OrganizerDashboard() {
                     />
                   </div>
 
-                  {/* Description */}
+
                   <div className="space-y-1.5 md:col-span-2">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                       Event Description
@@ -267,7 +267,7 @@ export default function OrganizerDashboard() {
                     />
                   </div>
 
-                  {/* Venue */}
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                       Venue / Location <span className="text-rose-500">*</span>
@@ -282,7 +282,7 @@ export default function OrganizerDashboard() {
                     />
                   </div>
 
-                  {/* Date & Time */}
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                       Date & Time <span className="text-rose-500">*</span>
@@ -296,7 +296,7 @@ export default function OrganizerDashboard() {
                     />
                   </div>
 
-                  {/* Capacity */}
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                       Ticket Capacity <span className="text-rose-500">*</span>
@@ -312,7 +312,7 @@ export default function OrganizerDashboard() {
                     />
                   </div>
 
-                  {/* Price */}
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                       Ticket Price ($)
@@ -330,7 +330,7 @@ export default function OrganizerDashboard() {
 
                 </div>
 
-                {/* Modal Actions */}
+
                 <div className="flex justify-end items-center gap-4 pt-4 border-t border-slate-800">
                   <button
                     type="button"

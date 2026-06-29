@@ -42,7 +42,7 @@ export default function EventDetails() {
 
   const handleBookTicket = async () => {
     if (!user) {
-      // Redirect to login if not authenticated
+      // redirect to login if not logged in
       router.push('/login');
       return;
     }
@@ -56,7 +56,7 @@ export default function EventDetails() {
         type: 'success',
         text: response.data.message || 'Ticket booked successfully! Enjoy the event.',
       });
-      // Re-fetch event details to update capacity count
+      // reload event details
       const updatedEvent = await api.get(`/events/${eventId}`);
       setEvent(updatedEvent.data);
     } catch (err: any) {
@@ -116,12 +116,12 @@ export default function EventDetails() {
     <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         
-        {/* Back navigation */}
+
         <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium">
           <ArrowLeft className="h-4 w-4" /> Back to all events
         </Link>
 
-        {/* Status Messages */}
+
         {message && (
           <div className={`p-4 rounded-xl border flex items-start gap-3 ${
             message.type === 'success'
@@ -137,7 +137,7 @@ export default function EventDetails() {
           </div>
         )}
 
-        {/* Hero Section */}
+
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-6">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
             <div className="space-y-2">
@@ -186,10 +186,10 @@ export default function EventDetails() {
           </div>
         </div>
 
-        {/* Content details */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          {/* Main Description */}
+
           <div className="md:col-span-2 space-y-6">
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
               <h2 className="text-xl font-bold text-white border-b border-slate-800 pb-3">
@@ -201,14 +201,14 @@ export default function EventDetails() {
             </div>
           </div>
 
-          {/* Ticket Booking Card */}
+
           <div className="md:col-span-1">
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl sticky top-24 space-y-6">
               <h3 className="text-lg font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
                 <Ticket className="h-5 w-5 text-indigo-400" /> Ticket Booking
               </h3>
 
-              {/* Occupancy metrics */}
+
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-semibold">
                   <span className="text-slate-400">Tickets Booked</span>
@@ -239,7 +239,7 @@ export default function EventDetails() {
                 </div>
               </div>
 
-              {/* Booking Button */}
+
               {user?.role === 'organizer' ? (
                 <div className="text-center text-xs text-slate-500 p-3 bg-slate-950 rounded-xl border border-slate-800">
                   Organizers cannot book tickets. Please sign in as an attendee to book.
@@ -269,7 +269,7 @@ export default function EventDetails() {
                 </button>
               )}
 
-              {/* Booking requirements notice */}
+
               {!user && (
                 <p className="text-[10px] text-center text-slate-500 leading-normal">
                   You will be prompted to log in or create an account before your ticket booking can be processed.
