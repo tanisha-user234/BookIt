@@ -11,6 +11,7 @@ import * as analyticsController from './controllers/analyticsController';
 
 // Import Middleware
 import { authenticate, authorize } from './middleware/auth';
+import { startHoldCleanUpJob } from './jobs/cleanupHolds';
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.get('/api/events/:id', eventController.getEventById);
 
 // User Bookings Routing
 app.post('/api/events/:id/book', authenticate as any, bookingController.bookEvent as any);
+app.post('/api/bookings/:id/confirm',authenticate,bookingController.confirmBooking)
 app.delete('/api/bookings/:id', authenticate as any, bookingController.cancelBooking as any);
 
 //  Organizer Dashboard Routing
@@ -60,4 +62,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  //start this cleanup as soon as the server starts 
+  startHoldCleanUpJob();
 });

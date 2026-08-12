@@ -1,6 +1,8 @@
 import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
+  // SO ADDITION OF expire_at is that if a user clicked on a certain seat for booking
+  // it's status is reserved PENDING  for 10 minutes
   await knex.raw(`
     -- 1. Create Users Table
     CREATE TABLE users (
@@ -38,9 +40,17 @@ export async function up(knex: Knex): Promise<void> {
       event_id INTEGER REFERENCES events(id) ON DELETE CASCADE,
       status VARCHAR(50) NOT NULL DEFAULT 'CONFIRMED',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,     
+      expires_at TIMESTAMP,
       UNIQUE(user_id, event_id)
     );
+
+    -- Index for checking the user status of booking
+    CREATE INDEX idx_booking_user_status ON bookings(user_id, status);
+    -- Index for fast booking checks by event
+    CREATE INDEX idx_booking_events_status ON bookings(event_id, status);
+    -- Index for the cleanup of pending bookings
+    CREATE INDEX idx_event_status ON bookings(expires_at) WHERE status = 'PENDING';
 
     -- 4. Create Activity Log Table (append-only)
     CREATE TABLE activity_log (
@@ -49,6 +59,9 @@ export async function up(knex: Knex): Promise<void> {
       action VARCHAR(50) NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
+    -- Index for organizer activity timelines
+    CREATE INDEX idx_activity_log_event_created ON activity_log(event_id, created_at DESC);
   `);
 }
 

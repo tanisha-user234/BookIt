@@ -12,7 +12,7 @@ const config: { [key: string]: Knex.Config } = {
       port: Number(process.env.DB_PORT) || 5432,
       database: process.env.DB_NAME || 'bookit',
       user: process.env.DB_USER || 'postgres',
-      password: process.env.DB_PASSWORD || 'project@123'
+      password: process.env.DB_PASSWORD || 'Tanu@123'
     },
     pool: {
       min: 2,
